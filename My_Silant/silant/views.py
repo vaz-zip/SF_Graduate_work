@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import *
 
-class Index(DetailView):
+class Index(ListView):
     model = Car
     template_name = 'index.html'
-    context_object_name = 'car'
+    context_object_name = 'cars'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

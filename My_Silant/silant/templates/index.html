@@ -1,0 +1,39 @@
+{% extends 'default.html' %}
+
+{% block title %}Index{% endblock title %}
+
+
+{% block main_menu %}
+<ul>
+    <li class="colorlib-active"><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'project' %}">Project</a></li>
+    <li><a href="{% url 'create' %}">Create</a></li>
+    <li><a href="{% url 'resources' %}">Resources</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+    {% if request.user.username == 'admin' %}
+        <li><a href="{% url 'management' %}">Management</a></li>
+    {% endif %}
+</ul>
+{% endblock main_menu %}
+
+
+{% block content %}
+
+
+    {% if cars %}
+        {% for post in posts %}
+            <p>
+            <a href="/index/{{ post.id }}" style="font-size: 20px;"><b>{{ cars.title }}</b></a><br>
+            {{ pcars.description|truncatechars:500}}<br>
+            <span style="font-size: 12px;">Автор: {% include "fragments/author_name.html" %}&nbsp;| &ensp;дата публикации: {{ post.dateCreation|date:'d.M.Y' }} г.</span>
+            </p>
+            <br><br>
+        {% endfor %}
+    {% else %}
+        <h2>Публикаций нет!</h2>
+    {% endif %}
+
+
+    
+{% endblock content %}
